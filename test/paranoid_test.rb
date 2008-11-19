@@ -2,7 +2,6 @@ require File.join(File.dirname(__FILE__), 'test_helper')
 
 class Widget < ActiveRecord::Base
   acts_as_paranoid
-  validates_uniqueness_of :title
   has_many :categories, :dependent => :destroy
   has_and_belongs_to_many :habtm_categories, :class_name => 'Category'
   has_one :category
@@ -13,7 +12,6 @@ class Widget < ActiveRecord::Base
 end
 
 class Category < ActiveRecord::Base
-  validates_uniqueness_of :title, :without_deleted => true
   belongs_to :widget
   belongs_to :any_widget, :class_name => 'Widget', :foreign_key => 'widget_id', :with_deleted => true
   acts_as_paranoid
@@ -38,17 +36,24 @@ class Tagging < ActiveRecord::Base
   acts_as_paranoid
 end
 
+class Person < ActiveRecord::Base
+  validates_uniqueness_of :name #include deleted items 
+end
+class Place < ActiveRecord::Base
+  validates_uniqueness_of :location, :without_deleted => true #ignores deleted items
+end
+
 class NonParanoidAndroid < ActiveRecord::Base
 end
 
 class ValidatesUniquenessTest < Test::Unit::TestCase
-  fixtures :widgets, :categories, :categories_widgets, :tags, :taggings
+  fixtures :people, :places
   
   def test_should_recognize_without_deleted_option
-    #validates_uniqueness_of :title
-    assert_equal widgets(:widget_1).valid?, false
-    # validates_uniqueness_of :title, :without_deleted => true
-    assert_equal categories(:category_1).valid?, true
+    #validates_uniqueness_of :title #include deleted items
+    assert_equal people(:person_1).valid?, false
+    #validates_uniqueness_of :title, :without_deleted => true #ignores deleted items
+    assert_equal places(:place_1).valid?, true
   end
 end
 

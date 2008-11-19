@@ -1,0 +1,7 @@
+person_1:
+  id: 1
+  name: Lindsay
+person_2:
+  id: 2
+  name: Lindsay
+  deleted_at: '2008-01-01 00:00:00'
