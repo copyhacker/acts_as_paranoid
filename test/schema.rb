@@ -26,5 +26,14 @@ ActiveRecord::Schema.define(:version => 1) do
     t.column :widget_id, :integer
     t.column :deleted_at, :timestamp
   end
+  
+  create_table :places, :force => true do |t|
+    t.column :location, :string
+    t.column :deleted_at, :timestamp
+  end
+  create_table :people, :force => true do |t|
+    t.column :name, :string
+    t.column :deleted_at, :timestamp
+  end
 
 end

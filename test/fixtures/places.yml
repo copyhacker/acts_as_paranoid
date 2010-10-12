@@ -1,0 +1,7 @@
+place_1:
+  id: 1
+  location: America
+place_2:
+  id: 2
+  location: New Zealand
+  deleted_at: '2008-01-01 00:00:00'

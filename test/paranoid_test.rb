@@ -36,7 +36,25 @@ class Tagging < ActiveRecord::Base
   acts_as_paranoid
 end
 
+class Person < ActiveRecord::Base
+  validates_uniqueness_of :name #include deleted items 
+end
+class Place < ActiveRecord::Base
+  validates_uniqueness_of :location, :without_deleted => true #ignores deleted items
+end
+
 class NonParanoidAndroid < ActiveRecord::Base
+end
+
+class ValidatesUniquenessTest < Test::Unit::TestCase
+  fixtures :people, :places
+  
+  def test_should_recognize_without_deleted_option
+    #validates_uniqueness_of :title #include deleted items
+    assert_equal people(:person_1).valid?, false
+    #validates_uniqueness_of :title, :without_deleted => true #ignores deleted items
+    assert_equal places(:place_1).valid?, true
+  end
 end
 
 class ParanoidTest < Test::Unit::TestCase

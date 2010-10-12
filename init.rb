@@ -27,8 +27,14 @@ class << ActiveRecord::Base
   alias_method :has_many, :has_many_without_deleted
   alias_method :exists_with_deleted?, :exists?
 end
+
 ActiveRecord::Base.send :include, Caboose::Acts::Paranoid
 ActiveRecord::Base.send :include, Caboose::Acts::ParanoidFindWrapper
+ActiveRecord::Base.send :extend, Validations::ValidatesUniquenessOfWithoutDeleted
+
 class << ActiveRecord::Base
   alias_method_chain :acts_as_paranoid, :find_wrapper
+  
+  alias_method :validates_uniqueness_of_with_deleted, :validates_uniqueness_of
+  alias_method :validates_uniqueness_of, :validates_uniqueness_of_without_deleted
 end
