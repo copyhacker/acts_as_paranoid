@@ -2458,3 +2458,49 @@
   [4;36;1mSQL (0.000589)[0m   [0;1mSELECT name FROM people WHERE (LOWER(people.name) = 'lindsay' AND people.id <> 1) [0m
   [4;35;1mPlace Load (0.000356)[0m   [0mSELECT * FROM places WHERE (places."id" = 1) [0m
   [4;36;1mSQL (0.000243)[0m   [0;1mSELECT location FROM places WHERE (LOWER(places.location) = 'america' AND places.id <> 1 AND places.deleted_at is NULL) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (59.5ms)[0m   [0;1mDROP TABLE "widgets"[0m
+  [4;35;1mSQL (4.3ms)[0m   [0mCREATE TABLE "widgets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(50), "category_id" integer, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (3.4ms)[0m   [0mDROP TABLE "categories"[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "widget_id" integer, "title" varchar(50), "deleted_at" datetime) [0m
+  [4;35;1mSQL (1.7ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.5ms)[0m   [0;1mDROP TABLE "categories_widgets"[0m
+  [4;35;1mSQL (3.1ms)[0m   [0mCREATE TABLE "categories_widgets" ("category_id" integer, "widget_id" integer) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (2.5ms)[0m   [0mDROP TABLE "tags"[0m
+  [4;36;1mSQL (2.1ms)[0m   [0;1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(50)) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (1.9ms)[0m   [0;1mDROP TABLE "taggings"[0m
+  [4;35;1mSQL (2.7ms)[0m   [0mCREATE TABLE "taggings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tag_id" integer, "widget_id" integer, "deleted_at" datetime) [0m
+  [4;36;1mSQL (117.0ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (1.8ms)[0m   [0mCREATE TABLE "places" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "location" varchar(255), "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (1.7ms)[0m   [0mCREATE TABLE "people" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM "schema_migrations"[0m
